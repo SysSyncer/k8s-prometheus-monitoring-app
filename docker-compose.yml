@@ -1,0 +1,71 @@
+# monitoring-app/docker-compose.yml
+services:
+  # Backend Service (Flask App)
+  server:
+    build:
+      context: ./server # Path to the backend directory
+      dockerfile: Dockerfile.backend # Specify the Dockerfile name
+    container_name: server_v3
+    ports:
+      # Map host port 5001 to container port 5001
+      - "5001:5001"
+    environment:
+      - FLASK_APP=app.py
+      - FLASK_ENV=development
+      - MONGO_URI=mongodb://mongo:27017/
+      - MONGO_DB_NAME=compose_db # Use a specific DB name for compose env
+    depends_on:
+      - mongo # Ensure mongo starts before the backend
+    networks:
+      - app-network # Connect to the custom network
+
+  # Frontend Service (React App served by Nginx)
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile.frontend
+    container_name: client_v3
+    ports:
+      # Map host port 8081 to container port 80 (Nginx default)
+      # Avoid 8080 (Jenkins) and 3000/5173 (local dev servers)
+      - "8081:80"
+    depends_on:
+      - server # Technically not needed for build, but good practice
+    environment:
+      - VITE_API_URL=http://localhost:5001
+    networks:
+      - app-network
+
+  # MongoDB Service
+  mongo:
+    image: mongo:5.0 # Use an official MongoDB image
+    container_name: mongo-db_v3
+    ports:
+      # Map host port 27017 to container port 27017 (optional, for external tools)
+      - "27017:27017"
+    volumes:
+      # Persist MongoDB data outside the container
+      - mongo-data:/data/db
+    networks:
+      - app-network
+
+  # Prometheus Service
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus_v3
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    networks:
+      - app-network
+
+# Define the network
+networks:
+  app-network:
+    driver: bridge # Default network driver
+
+# Define the volume for MongoDB data
+volumes:
+  mongo-data:
+    driver: local # Default volume driver

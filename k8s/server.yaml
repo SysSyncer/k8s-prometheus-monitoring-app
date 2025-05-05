@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: server
+  template:
+    metadata:
+      labels:
+        app: server
+    spec:
+      containers:
+        - name: server
+          image: syssyncer/monitoring-app-v3-server:latest
+          ports:
+            - containerPort: 5001
+          env:
+            - name: FLASK_APP
+              value: app.py
+            - name: FLASK_ENV
+              value: development
+            - name: MONGO_URI
+              value: mongodb://mongo:27017/
+            - name: MONGO_DB_NAME
+              value: compose_db
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: server
+spec:
+  ports:
+    - port: 5001
+      targetPort: 5001
+  selector:
+    app: server
+  type: NodePort

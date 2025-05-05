@@ -1,0 +1,135 @@
+/* frontend/src/App.css */
+.App {
+  font-family: sans-serif;
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #f4f7f6;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.App-header {
+  background-color: #4a90e2;
+  color: white;
+  padding: 15px;
+  border-radius: 8px 8px 0 0;
+  text-align: center;
+  margin: -20px -20px 20px -20px; /* Extend to container edges */
+}
+
+h1,
+h2 {
+  color: #333;
+}
+
+header > h1 {
+  color: #fff;
+}
+
+.error-message {
+  color: #d9534f;
+  background-color: #f2dede;
+  border: 1px solid #ebccd1;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 15px;
+}
+
+.item-form,
+.items-list {
+  background-color: #ffffff;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #555;
+}
+
+.form-group input[type="text"] {
+  width: calc(100% - 20px); /* Account for padding */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+button {
+  background-color: #5cb85c;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-right: 10px;
+  transition: background-color 0.2s ease;
+}
+
+button:hover {
+  background-color: #4cae4c;
+}
+
+button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+button.delete-button {
+  background-color: #d9534f;
+}
+button.delete-button:hover {
+  background-color: #c9302c;
+}
+button.cancel-button {
+  background-color: #f0ad4e;
+}
+button.cancel-button:hover {
+  background-color: #ec971f;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+.item-card {
+  background-color: #e9f4ff;
+  border: 1px solid #c6dfff;
+  border-radius: 4px;
+  padding: 15px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.item-card h3 {
+  margin: 0 0 5px 0;
+  color: #0056b3;
+}
+
+.item-card p {
+  margin: 0 0 5px 0;
+  color: #333;
+}
+
+.item-card small {
+  color: #777;
+  font-size: 0.8em;
+}
+
+.item-actions button {
+  padding: 5px 10px;
+  font-size: 0.9rem;
+}
