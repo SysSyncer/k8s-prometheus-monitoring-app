@@ -9,4 +9,4 @@ scrape_configs:
 
   - job_name: "flask-backend"
     static_configs:
-      - targets: ["server_v3:5001"]
+      - targets: ["server:5001"]

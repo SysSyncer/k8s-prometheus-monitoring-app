@@ -22,7 +22,7 @@ metrics.info('app_info', 'Backend Application info', version='1.0.0') # Static i
 # --- Database Connection ---
 # Use environment variable for connection string, default to local MongoDB
 MONGO_URI = os.environ.get('MONGO_URI', 'mongodb://localhost:27017/')
-DB_NAME = os.environ.get('MONGO_DB_NAME', 'mydatabase')
+DB_NAME = os.environ.get('MONGO_DB_NAME', 'todo')
 
 try:
     client = MongoClient(MONGO_URI)
